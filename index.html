@@ -9,79 +9,28 @@
 <body>
     <h1>Divisas</h1>
     <div class="container">
-        <!-- Columna de Tasas -->
-        <div class="rates-container">
-            <div class="rate-box">
-                <img id="bcv-image" src="" alt="Imagen BCV">
-                <h3 id="bcv-title"></h3>
-                <div>
-                    <p class="price" id="bcv-price"></p>
-                    <p class="rate-info">
-                        <span id="bcv-change"></span> |
-                        <span id="bcv-percentage"></span>
-                    </p>
-                    <p id="bcv-old-price"></p>
-                    <p class="last-update"><span id="bcv-last-update"></span></p>
-                </div>
-            </div>
-
-            <div class="rate-box">
-                <img id="enparalelovzla-image" src="" alt="Imagen EnParaleloVzla">
-                <h3 id="enparalelovzla-title"></h3>
-                <div>
-                    <p class="price" id="enparalelovzla-price"></p>
-                    <p class="rate-info">
-                        <span id="enparalelovzla-change"></span> |
-                        <span id="enparalelovzla-percentage"></span>
-                    </p>
-                    <p id="enparalelovzla-old-price"></p>
-                    <p class="last-update"><span id="enparalelovzla-last-update"></span></p>
-                </div>
-            </div>
-
-            <div class="rate-box">
-                <img id="promedio-image" src="" alt="Imagen Promedio">
-                <h3 id="promedio-title"></h3>
-                <div>
-                    <p class="price" id="promedio-price"></p>
-                    <p class="rate-info">
-                        <span id="promedio-change"></span> |
-                        <span id="promedio-percentage"></span>
-                    </p>
-                    <p id="promedio-old-price"></p>
-                    <p class="last-update"><span id="promedio-last-update"></span></p>
-                </div>
+        <div class="calculator-container">
+            <div class="form-container">
+                <h2>Convertir</h2>
+                <input type="text" id="amount" placeholder="0,00" inputmode="decimal" maxlength="15">
+                
+                <select id="currency-type">
+                    <option value="bolivares-to-dollars">Bolívares a Dólares</option>
+                    <option value="dollars-to-bolivares">Dólares a Bolívares</option>
+                </select>
+                
+                <select id="exchange-rate">
+                    <option value="bcv">Dólar Oficial (BCV)</option>
+                    <option value="enparalelovzla">EnParaleloVzla</option>
+                    <option value="promedio">Promedio</option>
+                    <option value="custom">Tasa personalizada</option>
+                </select>
+                
+                <input type="number" id="custom-rate" placeholder="Tasa personalizada" style="display: none;">
+                
+                <p id="conversion-result">0.00</p>
             </div>
         </div>
-
-        <!-- Columna de la Calculadora -->
-<!-- Columna de la Calculadora -->
-<div class="calculator-container">
-    <div class="form-container">
-        <h2>Convertir</h2>
-        <input type="number" id="amount" placeholder="0,00" inputmode="decimal" maxlength="15">
-        
-        <select id="currency-type">
-            <option value="bolivares-to-dollars">Bolívares a Dólares</option>
-            <option value="dollars-to-bolivares">Dólares a Bolívares</option>
-        </select>
-        
-        <select id="exchange-rate">
-            <option value="bcv">Dólar Oficial (BCV)</option>
-            <option value="enparalelovzla">EnParaleloVzla</option>
-            <option value="promedio">Promedio</option>
-            <option value="custom">Tasa personalizada</option>
-        </select>
-        
-        <input type="number" id="custom-rate" placeholder="Tasa personalizada" style="display: none;">
-        
-        <div class="result-container">
-            <p class="price" id="conversion-result">0.00</p>
-            <button class="copy-btn" id="copy-btn">📋</button>
-        </div>
-        <p id="copy-message">¡Copiado!</p>
-    </div>
-</div>
     </div>
     <script src="script.js"></script>
 </body>
