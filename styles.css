@@ -68,19 +68,40 @@ h1 {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin: 5px 0;
+    margin: 5px 0; /* Reducir el margen vertical */
 }
 
 .rate-box p {
-    margin: 2px 0;
+    margin: 2px 0; /* Reducir el margen vertical de los párrafos */
     font-size: 14px;
     color: #555;
 }
 
+/* Colores para aumento o disminución */
+.rate-box .positive {
+    color: green; /* Color verde para aumentos */
+}
+
+.rate-box .negative {
+    color: red; /* Color rojo para disminuciones */
+}
+
 .rate-box .last-update {
-    margin-top: 5px;
+    margin-top: 5px; /* Reducir el espacio arriba de "Última actualización" */
     font-size: 12px;
     color: #888;
+    line-height: 1.2; /* Reducir el espacio entre líneas */
+}
+
+.rate-box .last-update strong {
+    display: block; /* Mantener "Última actualización:" en una línea separada */
+    margin-bottom: 2px; /* Reducir el espacio entre el texto y la fecha */
+}
+
+.rate-box .last-update span {
+    display: block; /* Mantener la fecha en una línea separada */
+    font-size: 12px; /* Tamaño de la fuente de la fecha */
+    color: #888; /* Color del texto de la fecha */
 }
 
 /* Columna de la Calculadora */
@@ -126,6 +147,7 @@ h1 {
     border-radius: 8px;
     cursor: pointer;
     margin-left: 10px;
+    display: none;
 }
 
 .copy-btn:hover {
@@ -162,5 +184,7 @@ h1 {
 
     .rate-box.promedio {
         flex: 1 1 100%; /* Ocupa toda la fila */
+        max-width: calc(100% - 20px); /* Ancho completo menos el margen */
+        margin: 10px auto; /* Centrar horizontalmente */
     }
 }
