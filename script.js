@@ -93,20 +93,15 @@ class CurrencyCalculator {
 
   validateInput(input) {
     let value = input.value.trim();
-    value = value.replace(/,/g, '.');
+    value = value.replace(',', '.'); // Permitir comas o puntos como decimales
 
     if (!/^[\d.]*$/.test(value)) {
       this.displayResult('Solo se permiten números.');
       return false;
     }
 
-    if (value.length > 15) {
-      this.displayResult('Número demasiado largo.');
-      return false;
-    }
-
     const parts = value.split('.');
-    if (parts.length > 2 || (parts[1] && parts[1].length > 2) || (parts[0].length > 13)) {
+    if (parts.length > 2 || (parts[1] && parts[1].length > 2)) {
       this.displayResult('Formato incorrecto, use hasta dos decimales.');
       return false;
     }
@@ -116,7 +111,7 @@ class CurrencyCalculator {
 
   handleInput(inputElement) {
     if (this.validateInput(inputElement)) {
-      inputElement.value = inputElement.value.replace(/,/g, '.');
+      inputElement.value = inputElement.value.replace(',', '.');
       clearTimeout(this.debounceTimeout);
       this.debounceTimeout = setTimeout(() => this.convert(), 300);
     }
@@ -143,32 +138,17 @@ class CurrencyCalculator {
     const isToUSD = this.elements.currencyType.value === 'bolivares-to-dollars';
     const currency = isToUSD ? 'USD' : 'VEF';
 
-    if (!this.elements.amount.value.trim() && !this.elements.customRate.value.trim()) {
-      this.elements.result.textContent = ''; 
-      this.elements.copyBtn.style.display = 'none';
-      return;
-    }
-
     if (isNaN(amount) || amount <= 0) {
       this.displayResult('Ingrese un monto válido.');
-      this.elements.copyBtn.style.display = 'none';
       return;
     }
 
     if (!rate) {
       this.displayResult('Seleccione una tasa de cambio válida.');
-      this.elements.copyBtn.style.display = 'none';
       return;
     }
 
     const result = isToUSD ? (amount / rate) : (amount * rate);
-
-    if (!isFinite(result)) {
-      this.displayResult('Error en el cálculo, revise los valores.');
-      this.elements.copyBtn.style.display = 'none';
-      return;
-    }
-
     this.displayResult(result, currency);
   }
 
@@ -181,24 +161,7 @@ class CurrencyCalculator {
   }
 
   displayResult(value, currency) {
-    if (typeof value === 'string') {
-      this.elements.result.textContent = value;
-      this.elements.copyBtn.style.display = 'none';
-    } else {
-      const formattedValue = this.formatResult(value);
-      this.elements.result.textContent = `${formattedValue} ${currency}`;
-      this.elements.copyBtn.style.display = 'inline-block';
-    }
-  }
-
-  copyResult() {
-    const text = this.elements.result.textContent.replace(/[^\d.]/g, '');
-    navigator.clipboard.writeText(text).then(() => {
-      this.elements.copyMsg.style.display = 'block';
-      setTimeout(() => {
-        this.elements.copyMsg.style.display = 'none';
-      }, 2000);
-    });
+    this.elements.result.textContent = `${this.formatResult(value)} ${currency}`;
   }
 }
 
