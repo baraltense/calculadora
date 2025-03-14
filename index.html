@@ -58,7 +58,7 @@
         <div class="calculator-container">
             <div class="form-container">
                 <h2>Convertir</h2>
-                <input type="text" id="amount" maxlength="15" placeholder="Cantidad a convertir" oninput="formatInput(this); calculate()" />
+                <input type="number" id="amount" maxlength="15" placeholder="Cantidad a convertir" oninput="formatInput(this); calculate()" />
                 <select id="currency-type" onchange="calculate()">
                     <option value="bolivares-to-dollars">Bolívares a Dólares</option>
                     <option value="dollars-to-bolivares">Dólares a Bolívares</option>
@@ -69,7 +69,7 @@
                     <option value="promedio">Promedio</option>
                     <option value="custom">Tasa personalizada</option>
                 </select>
-                <input type="text" id="custom-rate" maxlength="15" placeholder="Ingresa tasa personalizada" style="display: none;" oninput="formatInput(this); calculate()" />
+                <input type="number" id="custom-rate" maxlength="15" placeholder="Ingresa tasa personalizada" style="display: none;" oninput="formatInput(this); calculate()" />
             </div>
 
             <div class="result-container">
