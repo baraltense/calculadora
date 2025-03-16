@@ -1,0 +1,416 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #333;
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas en pantallas grandes */
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-items: center; /* Alinea los elementos del grid al centro horizontalmente */
+}
+
+/* Columna de Tasas */
+.rates-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.rate-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 200px;
+    flex: 1 1 calc(50% - 15px); /* Dos columnas en pantallas grandes */
+}
+
+.rate-box img {
+    max-width: 80px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.rate-box .price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin: 5px 0; /* Reducir el margen vertical */
+}
+
+.rate-box p {
+    margin: 2px 0; /* Reducir el margen vertical de los párrafos */
+    font-size: 14px;
+    color: #555;
+}
+
+/* Colores para aumento o disminución */
+.rate-box .positive {
+    color: green; /* Color verde para aumentos */
+}
+
+.rate-box .negative {
+    color: red; /* Color rojo para disminuciones */
+}
+
+.rate-box .last-update {
+    margin-top: 5px; /* Reducir el espacio arriba de "Última actualización" */
+    font-size: 12px;
+    color: #888;
+    line-height: 1.2; /* Reducir el espacio entre líneas */
+}
+
+.rate-box .last-update strong {
+    display: block; /* Mantener "Última actualización:" en una línea separada */
+    margin-bottom: 2px; /* Reducir el espacio entre el texto y la fecha */
+}
+
+.rate-box .last-update span {
+    display: block; /* Mantener la fecha en una línea separada */
+    font-size: 12px; /* Tamaño de la fuente de la fecha */
+    color: #888; /* Color del texto de la fecha */
+}
+
+/* Nueva Calculadora de Divisas */
+.calculator-container {
+    width: 100%; /* Para que ocupe el espacio restante en el grid */
+    display: flex;
+    justify-content: center; /* Centrar la calculadora */
+    max-height: 600px; /* Altura máxima para la calculadora */
+    overflow-y: auto; /* Barra de desplazamiento vertical si excede la altura */
+}
+
+.form-container {
+    width: 350px; /* Ancho fijo de la calculadora en pantallas grandes */
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Evitar desbordamiento horizontal */
+    position: relative; /* Para posicionar elementos internos */
+}
+
+.form-container h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+    white-space: nowrap; /* Evitar saltos de línea */
+    overflow: hidden; /* Evitar desbordamiento */
+    text-overflow: ellipsis; /* Mostrar puntos suspensivos si el texto es largo */
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    outline: none;
+}
+
+.form-container input.invalid {
+    border-color: #e74c3c;
+    background-color: #fdedec;
+    animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.85em;
+    margin: -10px 0 10px;
+    height: 18px;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    text-align: center;
+    /* Remover posición absoluta */
+    position: relative;
+    bottom: auto;
+    left: auto;
+}
+}
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px 20px; /* Aumentar el padding horizontal */
+    background: #e9ecef; /* Un fondo gris claro */
+    border-radius: 10px; /* Bordes más redondeados */
+    border: 1px solid #ced4da; /* Un borde sutil */
+    box-sizing: border-box;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-container .price {
+    font-size: 1.6em; /* Aumentar el tamaño de la fuente */
+    color: #28a745; /* Un color que destaque (verde) */
+    font-weight: 600; /* Hacerlo más bold */
+    margin: 0;
+}
+
+/* Estilo adicional para la moneda (opcional) */
+.result-container .currency {
+    font-size: 1em;
+    color: #6c757d; /* Un gris más oscuro */
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+#copy-btn {
+    background: #007bff; /* Un azul llamativo */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 15px; /* Aumentar el margen superior */
+    width: 100%;
+    display: none;
+}
+
+#copy-btn:hover {
+    background: #0056b3;
+}
+
+#copy-message {
+    color: #198754; /* Un verde para el mensaje de éxito */
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    position: relative;
+    left: 0;
+    background-color: #f0fff3; /* Un fondo verde muy claro */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bbf7d0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#copy-message.show {
+    display: block;
+    opacity: 1;
+}
+
+#copy-message.error {
+    color: #dc3545; /* Un rojo para el mensaje de error */
+    background-color: #fdecea; /* Un fondo rojo muy claro */
+    border-color: #f5c6cb;
+}
+
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr; /* Una columna en móviles */
+        justify-items: stretch; /* Los elementos ocupan todo el ancho en móviles */
+    }
+
+    .calculator-container {
+        order: -1; /* Mantiene la calculadora en la parte superior (orden predeterminado es 0) */
+        width: 100%;
+        max-height: 500px; /* O el valor que hayas ajustado */
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .rates-container {
+        order: 1; /* Coloca el contenedor de tasas visualmente debajo */
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        padding-top: 10px; /* Añade un poco de espacio entre la calculadora y las tasas */
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+        position: relative;
+    }
+
+    .form-container h2 {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.6em;
+    }
+
+    .form-container input,
+    .form-container select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .rate-box {
+        flex: 1 1 calc(50% - 10px);
+    }
+
+    .rate-box.promedio {
+        flex: 1 1 100%;
+        max-width: calc(100% - 20px);
+        margin: 10px auto;
+    }
+}
+
+/* Estilos para el resultado de la calculadora */
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px; /* Aumentar el padding horizontal */
+    background: #e9ecef; /* Un fondo gris claro */
+    border-radius: 10px; /* Bordes más redondeados */
+    border: 1px solid #ced4da; /* Un borde sutil */
+    box-sizing: border-box;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.result-container .price {
+    font-size: 1.6em; /* Aumentar el tamaño de la fuente */
+    color: #28a745; /* Un color que destaque (verde) */
+    font-weight: 600; /* Hacerlo más bold */
+    margin: 0;
+}
+
+/* Estilo adicional para la moneda (opcional) */
+.result-container .currency {
+    font-size: 1em;
+    color: #6c757d; /* Un gris más oscuro */
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+#copy-btn {
+    background: #007bff; /* Un azul llamativo */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 15px; /* Aumentar el margen superior */
+    width: 100%;
+    display: none;
+}
+
+#copy-btn:hover {
+    background: #0056b3;
+}
+
+#copy-message {
+    color: #198754; /* Un verde para el mensaje de éxito */
+    text-align: center;
+    margin-top: 10px;
+    display: none;
+    transition: opacity 0.3s ease;
+    width: 100%;
+    position: relative;
+    left: 0;
+    background-color: #f0fff3; /* Un fondo verde muy claro */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bbf7d0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#copy-message.show {
+    display: block;
+    opacity: 1;
+}
+
+#copy-message.error {
+    color: #dc3545; /* Un rojo para el mensaje de error */
+    background-color: #fdecea; /* Un fondo rojo muy claro */
+    border-color: #f5c6cb;
+}
